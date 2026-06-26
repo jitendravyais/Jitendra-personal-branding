@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Jitendra Patil — Helping creators and businesses grow through social media, digital products, and strategic marketing."/>
+<title>Jitendra Patil | Digital Growth Strategist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --bg: #0B0F19;
+  --card-bg: rgba(255,255,255,0.05);
+  --blue: #4F8CFF;
+  --cyan: #00D4FF;
+  --text: #FFFFFF;
+  --sub: #B4B8C5;
+  --border: rgba(79,140,255,0.18);
+  --glow: rgba(79,140,255,0.25);
+  --grad: linear-gradient(135deg, #4F8CFF 0%, #00D4FF 100%);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ──── LOADER ──── */
+#loader {
+  position: fixed; inset: 0; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; transition: opacity 0.6s ease;
+}
+.loader-ring {
+  width: 52px; height: 52px;
+  border: 3px solid rgba(79,140,255,0.2);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ──── PARTICLES ──── */
+#particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle {
+  position: absolute; border-radius: 50%;
+  background: var(--blue); opacity: 0;
+  animation: float-particle linear infinite;
+}
+@keyframes float-particle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.15; }
+  90% { opacity: 0.08; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+/* ──── NAVBAR ──── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(11,15,25,0.75);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  transition: background 0.3s;
+}
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800; font-size: 1.15rem;
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--sub); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--grad); color: #fff; border: none; border-radius: 10px;
+  padding: 0.5rem 1.25rem; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+
+/* mobile nav */
+.mobile-nav {
+  display: none; position: fixed; inset: 64px 0 0 0;
+  background: rgba(11,15,25,0.97); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem; z-index: 99;
+}
+.mobile-nav a { color: var(--text); text-decoration: none; font-size: 1.3rem; font-weight: 600; }
+.mobile-nav.open { display: flex; }
+
+/* ──── SECTION WRAPPER ──── */
+section { position: relative; z-index: 1; padding: 100px 5%; }
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.9rem);
+  font-weight: 800; line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-sub {
+  font-size: 1rem; color: var(--sub); max-width: 560px; line-height: 1.7;
+}
+
+/* ──── HERO ──── */
+#hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem; padding-top: 120px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(79,140,255,0.12);
+  border: 1px solid var(--border);
+  border-radius: 100px; padding: 0.35rem 1rem;
+  font-size: 0.78rem; font-weight: 600; color: var(--cyan);
+  margin-bottom: 1.5rem;
+}
+.hero-badge span { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.5;transform:scale(1.4);} }
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+  margin-bottom: 1.4rem;
+}
+.hero-title .grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub {
+  font-size: 1.05rem; color: var(--sub); line-height: 1.75;
+  margin-bottom: 2.2rem; max-width: 480px;
+}
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--grad); color: #fff; border: none; border-radius: 12px;
+  padding: 0.85rem 2rem; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'Inter', sans-serif; text-decoration: none; display: inline-block;
+  box-shadow: 0 0 28px rgba(79,140,255,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(79,140,255,0.45); }
+.btn-secondary {
+  background: transparent;
+  border: 1.5px solid var(--border); color: var(--text);
+  border-radius: 12px; padding: 0.85rem 2rem;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: 'Inter', sans-serif; text-decoration: none; display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--blue); background: rgba(79,140,255,0.08); }
+
+/* hero visual */
+.hero-visual {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.hero-dashboard {
+  width: 100%; max-width: 460px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 80px rgba(79,140,255,0.12);
+  animation: float-y 4s ease-in-out infinite;
+}
+@keyframes float-y { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+.dash-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+.dash-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--grad); display: flex; align-items: center; justify-content: center;
+  font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.1rem; color: #fff;
+}
+.dash-info { flex: 1; }
+.dash-name { font-weight: 700; font-size: 0.95rem; }
+.dash-role { font-size: 0.75rem; color: var(--sub); }
+.dash-badge {
+  background: rgba(0,212,255,0.12); border: 1px solid rgba(0,212,255,0.3);
+  color: var(--cyan); font-size: 0.7rem; font-weight: 600;
+  padding: 0.25rem 0.65rem; border-radius: 100px;
+}
+.dash-stats {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem; margin-bottom: 1.5rem;
+}
+.dash-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 0.75rem; text-align: center;
+}
+.dash-stat-val { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.15rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.dash-stat-lbl { font-size: 0.62rem; color: var(--sub); margin-top: 2px; }
+.dash-chart { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+.dash-chart-title { font-size: 0.72rem; color: var(--sub); margin-bottom: 0.75rem; font-weight: 600; }
+.bars { display: flex; align-items: flex-end; gap: 6px; height: 56px; }
+.bar {
+  flex: 1; border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, var(--blue), var(--cyan));
+  animation: grow-bar 1.5s ease forwards;
+  transform-origin: bottom;
+}
+@keyframes grow-bar { from{transform:scaleY(0);} to{transform:scaleY(1);} }
+.dash-platforms { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.platform-pill {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px; padding: 0.3rem 0.75rem;
+  font-size: 0.72rem; font-weight: 600; color: var(--sub);
+}
+.platform-pill i { color: var(--blue); font-size: 0.8rem; }
+
+/* floating chips */
+.chip {
+  position: absolute;
+  background: rgba(15,20,35,0.9);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.5rem 0.85rem;
+  font-size: 0.75rem; font-weight: 600;
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; gap: 0.4rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.chip-1 { top: 10%; right: -5%; animation: chip-float 3s ease-in-out infinite; }
+.chip-2 { bottom: 18%; left: -8%; animation: chip-float 3.5s ease-in-out infinite 0.5s; }
+@keyframes chip-float { 0%,100%{transform:translateY(0) rotate(-2deg);} 50%{transform:translateY(-8px) rotate(2deg);} }
+
+/* ──── STATS ──── */
+#stats {
+  padding: 60px 5%;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.stat-card {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s, border-color 0.25s;
+}
+.stat-card:hover { transform: translateY(-4px); border-color: var(--blue); }
+.stat-num {
+  font-family: 'Poppins', sans-serif; font-weight: 900;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.stat-lbl { font-size: 0.85rem; color: var(--sub); margin-top: 0.4rem; font-weight: 500; }
+
+/* ──── ABOUT ──── */
+#about { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-visual {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+}
+.about-icon-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.about-icon-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; padding: 1.25rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.about-icon-card:hover { transform: scale(1.04); }
+.icon-glow {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(79,140,255,0.12);
+  border: 1px solid rgba(79,140,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 0.75rem;
+  font-size: 1.2rem; color: var(--blue);
+  box-shadow: 0 0 20px rgba(79,140,255,0.2);
+}
+.about-icon-card p { font-size: 0.78rem; font-weight: 600; color: var(--sub); }
+.about-text .section-sub { margin-bottom: 1.5rem; }
+.trait { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.trait i { color: var(--cyan); font-size: 0.85rem; }
+.trait span { font-size: 0.9rem; color: var(--sub); }
+
+/* ──── SERVICES ──── */
+.services-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  margin-top: 3rem;
+}
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(79,140,255,0.06) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.service-card:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: 0 20px 48px rgba(79,140,255,0.15); }
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: rgba(79,140,255,0.1);
+  border: 1px solid rgba(79,140,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; margin-bottom: 1.25rem;
+  box-shadow: 0 0 24px rgba(79,140,255,0.2);
+}
+.service-card h3 { font-family: 'Poppins',sans-serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 0.6rem; }
+.service-card p { font-size: 0.87rem; color: var(--sub); line-height: 1.65; }
+
+/* ──── PRODUCTS ──── */
+#products { background: rgba(255,255,255,0.01); }
+.products-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  margin-top: 3rem;
+}
+.product-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(79,140,255,0.18); }
+.product-thumb {
+  height: 140px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem;
+  position: relative; overflow: hidden;
+}
+.product-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(11,15,25,0.5));
+}
+.p1 { background: linear-gradient(135deg, #1a2a4a, #0f1e3a); }
+.p2 { background: linear-gradient(135deg, #1a1a3a, #0f0f2a); }
+.p3 { background: linear-gradient(135deg, #1a2a1a, #0f1e0f); }
+.p4 { background: linear-gradient(135deg, #2a1a2a, #1e0f1e); }
+.product-body { padding: 1.25rem; }
+.product-body h3 { font-family: 'Poppins',sans-serif; font-weight: 700; font-size: 0.92rem; margin-bottom: 0.4rem; }
+.product-body p { font-size: 0.78rem; color: var(--sub); margin-bottom: 1rem; line-height: 1.55; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.price {
+  font-family: 'Poppins',sans-serif; font-weight: 800; font-size: 1.1rem;
+  background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.buy-btn {
+  background: var(--grad); color: #fff; border: none; border-radius: 8px;
+  padding: 0.45rem 1rem; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.buy-btn:hover { opacity: 0.85; transform: scale(1.04); }
+
+/* ──── WHY ──── */
+#why .section-sub { margin-bottom: 4rem; }
+.timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(to bottom, var(--blue), var(--cyan), transparent);
+}
+.timeline-item {
+  display: flex; gap: 2rem;
+  margin-bottom: 2.5rem; align-items: flex-start;
+}
+.t-num {
+  width: 58px; height: 58px; flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Poppins',sans-serif; font-weight: 900; font-size: 1.1rem; color: #fff;
+  box-shadow: 0 0 28px rgba(79,140,255,0.4);
+  position: relative; z-index: 1;
+}
+.t-content {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.25rem 1.5rem;
+  backdrop-filter: blur(10px); flex: 1;
+  transition: border-color 0.25s;
+}
+.t-content:hover { border-color: var(--blue); }
+.t-content h3 { font-family: 'Poppins',sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.35rem; }
+.t-content p { font-size: 0.84rem; color: var(--sub); line-height: 1.6; }
+
+/* ──── TESTIMONIALS ──── */
+#testimonials { overflow: hidden; }
+.testimonials-track-wrap { margin-top: 3rem; overflow: hidden; position: relative; }
+.testimonials-track-wrap::before,
+.testimonials-track-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+}
+.testimonials-track-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.testimonials-track-wrap::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+.testimonials-track {
+  display: flex; gap: 1.5rem;
+  animation: slide-track 22s linear infinite;
+  width: max-content;
+}
+.testimonials-track:hover { animation-play-state: paused; }
+@keyframes slide-track { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+.testi-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 20px; padding: 1.75rem;
+  width: 320px; flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.25s;
+}
+.testi-card:hover { border-color: var(--blue); }
+.stars { color: #FFD700; font-size: 0.85rem; margin-bottom: 0.75rem; }
+.testi-card blockquote { font-size: 0.9rem; color: var(--sub); line-height: 1.65; margin-bottom: 1.25rem; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 0.75rem; }
+.testi-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--grad); display: flex; align-items: center; justify-content: center;
+  font-family: 'Poppins',sans-serif; font-weight: 700; font-size: 0.85rem; color: #fff;
+}
+.testi-meta .name { font-weight: 700; font-size: 0.85rem; }
+.testi-meta .role { font-size: 0.75rem; color: var(--sub); }
+
+/* ──── CTA ──── */
+#cta {
+  padding: 80px 5%;
+  background: linear-gradient(135deg, rgba(79,140,255,0.08) 0%, rgba(0,212,255,0.05) 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+#cta .section-title { max-width: 600px; margin: 0 auto 1rem; }
+#cta .section-sub { margin: 0 auto 2.5rem; text-align: center; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ──── FOOTER ──── */
+footer {
+  padding: 3rem 5%; position: relative; z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-brand .logo { font-size: 1.1rem; }
+.footer-brand p { font-size: 0.8rem; color: var(--sub); margin-top: 0.4rem; max-width: 300px; line-height: 1.6; }
+.social-links { display: flex; gap: 0.75rem; }
+.social-link {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sub); text-decoration: none; font-size: 0.95rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.social-link:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+.footer-copy { width: 100%; text-align: center; font-size: 0.78rem; color: var(--sub); padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* ──── ANIMATIONS ──── */
+.fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ──── RESPONSIVE ──── */
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  #hero { grid-template-columns: 1fr; padding-top: 100px; gap: 2.5rem; }
+  .hero-visual { order: -1; }
+  .chip-1, .chip-2 { display: none; }
+  #about { grid-template-columns: 1fr; gap: 2.5rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr; }
+  section { padding: 70px 4%; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader"><div class="loader-ring"></div></div>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">JP</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Work With Me</button>
+  <div class="hamburger" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#products" onclick="toggleMenu()">Products</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#cta" onclick="toggleMenu()">Work With Me</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left fade-up">
+    <div class="hero-badge"><span></span> Open to New Projects — 2026</div>
+    <h1 class="hero-title">Build.<br><span class="grad">Grow.</span><br>Monetize.</h1>
+    <p class="hero-sub">Helping creators and businesses grow through social media strategy, digital products, and practical systems that actually work.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#cta" class="btn-secondary">Work With Me</a>
+    </div>
+  </div>
+  <div class="hero-visual fade-up">
+    <div class="hero-dashboard">
+      <div class="dash-header">
+        <div class="dash-avatar">JP</div>
+        <div class="dash-info">
+          <div class="dash-name">Jitendra Patil</div>
+          <div class="dash-role">Digital Growth Strategist</div>
+        </div>
+        <div class="dash-badge">● Live</div>
+      </div>
+      <div class="dash-stats">
+        <div class="dash-stat"><div class="dash-stat-val">50+</div><div class="dash-stat-lbl">Resources</div></div>
+        <div class="dash-stat"><div class="dash-stat-val">500+</div><div class="dash-stat-lbl">Creators</div></div>
+        <div class="dash-stat"><div class="dash-stat-val">100+</div><div class="dash-stat-lbl">Strategies</div></div>
+      </div>
+      <div class="dash-chart">
+        <div class="dash-chart-title">MONTHLY GROWTH ↑</div>
+        <div class="bars">
+          <div class="bar" style="height:35%;animation-delay:0.1s"></div>
+          <div class="bar" style="height:52%;animation-delay:0.2s"></div>
+          <div class="bar" style="height:44%;animation-delay:0.3s"></div>
+          <div class="bar" style="height:68%;animation-delay:0.4s"></div>
+          <div class="bar" style="height:60%;animation-delay:0.5s"></div>
+          <div class="bar" style="height:82%;animation-delay:0.6s"></div>
+          <div class="bar" style="height:75%;animation-delay:0.7s"></div>
+          <div class="bar" style="height:91%;animation-delay:0.8s"></div>
+        </div>
+      </div>
+      <div class="dash-platforms">
+        <div class="platform-pill"><i class="fab fa-instagram"></i> Instagram</div>
+        <div class="platform-pill"><i class="fab fa-linkedin"></i> LinkedIn</div>
+        <div class="platform-pill"><i class="fab fa-youtube"></i> YouTube</div>
+      </div>
+    </div>
+    <div class="chip chip-1"><i class="fas fa-arrow-trend-up" style="color:var(--cyan)"></i> +38% reach this month</div>
+    <div class="chip chip-2"><i class="fas fa-star" style="color:#FFD700"></i> 4.9 Creator Rating</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-card fade-up">
+      <div class="stat-num" data-target="50" data-suffix="+">0</div>
+      <div class="stat-lbl">Digital Resources Created</div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="stat-num" data-target="100" data-suffix="+">0</div>
+      <div class="stat-lbl">Strategies Shared</div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="stat-num" data-target="500" data-suffix="+">0</div>
+      <div class="stat-lbl">Creators Reached</div>
+    </div>
+    <div class="stat-card fade-up">
+      <div class="stat-num" data-target="2026" data-suffix="">2026</div>
+      <div class="stat-lbl">Growth Vision</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual fade-up">
+    <div class="about-icon-grid">
+      <div class="about-icon-card">
+        <div class="icon-glow"><i class="fas fa-mobile-screen-button"></i></div>
+        <p>Social Media Strategy</p>
+      </div>
+      <div class="about-icon-card">
+        <div class="icon-glow"><i class="fas fa-chart-line"></i></div>
+        <p>Growth Systems</p>
+      </div>
+      <div class="about-icon-card">
+        <div class="icon-glow"><i class="fas fa-file-arrow-down"></i></div>
+        <p>Digital Products</p>
+      </div>
+      <div class="about-icon-card">
+        <div class="icon-glow"><i class="fas fa-bullseye"></i></div>
+        <p>Brand Positioning</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-text fade-up">
+    <span class="section-label">Who I Am</span>
+    <h2 class="section-title">Who is<br>Jitendra Patil?</h2>
+    <p class="section-sub">I believe opportunities are created online. My mission is to simplify social media growth and provide actionable digital solutions — helping creators and businesses achieve real results without unnecessary complexity.</p>
+    <div class="trait"><i class="fas fa-check-circle"></i><span>Aspiring entrepreneur & digital creator</span></div>
+    <div class="trait"><i class="fas fa-check-circle"></i><span>Social media strategist with a results-first mindset</span></div>
+    <div class="trait"><i class="fas fa-check-circle"></i><span>Builder of practical tools, templates, and eBooks</span></div>
+    <div class="trait"><i class="fas fa-check-circle"></i><span>Focused on India's creator and small business community</span></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div style="text-align:center">
+    <span class="section-label">What I Offer</span>
+    <h2 class="section-title fade-up">Services Designed<br>For Real Growth</h2>
+    <p class="section-sub fade-up" style="margin:0 auto">Everything you need to build and scale your online presence — strategy first, execution always.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon">📱</div>
+      <h3>Social Media Strategy</h3>
+      <p>Content planning, audience growth strategy, and platform-specific optimization so your efforts compound over time — not scatter.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">🎯</div>
+      <h3>Social Media Optimization</h3>
+      <p>Profile positioning, visual branding audits, and bio-to-conversion improvements to turn visitors into followers and followers into buyers.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">📈</div>
+      <h3>Growth Consultation</h3>
+      <p>One-on-one sessions with actionable growth frameworks for creators and small businesses ready to move faster with clarity.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon">💡</div>
+      <h3>Digital Product Creation</h3>
+      <p>eBooks, templates, content guides, and digital kits built for your niche — packaged and priced to sell on Instamojo, Gumroad, or your own store.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div style="text-align:center">
+    <span class="section-label">Digital Store</span>
+    <h2 class="section-title fade-up">Featured Digital Products</h2>
+    <p class="section-sub fade-up" style="margin:0 auto">Practical resources you can use immediately — no fluff, all action.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card fade-up">
+      <div class="product-thumb p1">📘</div>
+      <div class="product-body">
+        <h3>Social Media Strategy eBook 2026</h3>
+        <p>A step-by-step playbook to build, grow, and monetize your social media presence in 2026.</p>
+        <div class="product-footer">
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-thumb p2">🎬</div>
+      <div class="product-body">
+        <h3>Instagram Reel Bundle</h3>
+        <p>50+ proven reel ideas, hooks, and caption templates to 10x your reach on Instagram.</p>
+        <div class="product-footer">
+          <div class="price">₹199</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-thumb p3">📅</div>
+      <div class="product-body">
+        <h3>Content Calendar Templates</h3>
+        <p>90-day plug-and-play content calendars for Instagram, LinkedIn, and YouTube creators.</p>
+        <div class="product-footer">
+          <div class="price">₹149</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-up">
+      <div class="product-thumb p4">🚀</div>
+      <div class="product-body">
+        <h3>Creator Growth Toolkit</h3>
+        <p>The complete bundle — strategy, templates, reel ideas, and growth checklist in one kit.</p>
+        <div class="product-footer">
+          <div class="price">₹499</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div style="text-align:center; margin-bottom:4rem">
+    <span class="section-label">The Process</span>
+    <h2 class="section-title fade-up">Why Work With Me</h2>
+    <p class="section-sub fade-up" style="margin:0 auto">A clear, four-step process that moves from understanding your goals to measurable results — no guesswork.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-up">
+      <div class="t-num">1</div>
+      <div class="t-content">
+        <h3>Understand Your Goals</h3>
+        <p>We start with a clear conversation about where you are, where you want to go, and what's standing in the way.</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-up">
+      <div class="t-num">2</div>
+      <div class="t-content">
+        <h3>Build Your Strategy</h3>
+        <p>A custom roadmap — no templates, no copy-paste. Built specifically around your niche, audience, and platform.</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-up">
+      <div class="t-num">3</div>
+      <div class="t-content">
+        <h3>Execute Consistently</h3>
+        <p>Strategy means nothing without execution. We build systems that keep you consistent even when motivation is low.</p>
+      </div>
+    </div>
+    <div class="timeline-item fade-up">
+      <div class="t-num">4</div>
+      <div class="t-content">
+        <h3>Measure & Improve</h3>
+        <p>Track what matters, cut what doesn't, and double down on what grows. Continuous improvement, not one-time advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div style="text-align:center; margin-bottom:1rem">
+    <span class="section-label">Social Proof</span>
+    <h2 class="section-title fade-up">What Creators Say</h2>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track" id="track">
+      <!-- cards duplicated for seamless loop -->
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <span class="section-label">Let's Build Together</span>
+  <h2 class="section-title fade-up">Ready to Build Your<br>Digital Presence?</h2>
+  <p class="section-sub fade-up">Whether you need a strategy, a product, or a full growth plan — let's make it happen. Start with your digital products or book a consultation.</p>
+  <div class="cta-btns fade-up">
+    <a href="#products" class="btn-primary">Browse Products</a>
+    <a href="https://wa.me/" class="btn-secondary">Book Consultation</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="logo">Jitendra Patil</div>
+    <p>Helping creators and businesses grow online through digital products and strategic marketing.</p>
+  </div>
+  <div class="social-links">
+    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+    <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+  </div>
+  <div class="footer-copy">© 2026 Jitendra Patil. All Rights Reserved. Built for growth.</div>
+</footer>
+
+<script>
+// ──── LOADER
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader');
+  setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 600); }, 800);
+});
+
+// ──── PARTICLES
+const pc = document.getElementById('particles');
+for (let i = 0; i < 28; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 4 + 2;
+  p.style.cssText = `
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;
+    animation-duration:${Math.random()*18+10}s;
+    animation-delay:${Math.random()*10}s;
+    opacity:0;
+  `;
+  pc.appendChild(p);
+}
+
+// ──── MOBILE NAV
+function toggleMenu() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+// ──── FADE UP
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ──── COUNTER
+function animateCount(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  if (target === 2026) { el.textContent = '2026'; return; }
+  let start = 0;
+  const step = Math.ceil(target / 60);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { el.textContent = target + suffix; clearInterval(timer); }
+    else { el.textContent = start + suffix; }
+  }, 22);
+}
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); counterObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObs.observe(el));
+
+// ──── TESTIMONIALS
+const testiData = [
+  { quote: "Simple strategies that actually helped me stay consistent for the first time in months.", name: "Priya M.", role: "Lifestyle Creator, Mumbai", init: "P" },
+  { quote: "The digital resources were practical and easy to implement. Saw results within two weeks.", name: "Rahul K.", role: "Small Business Owner, Pune", init: "R" },
+  { quote: "Professional guidance with clear action steps. No fluff, just what works.", name: "Sneha D.", role: "Freelance Designer, Thane", init: "S" },
+  { quote: "Finally a strategy that makes sense for the Indian market. Highly recommend.", name: "Arjun T.", role: "Instagram Creator, Nashik", init: "A" },
+  { quote: "The content calendar template alone saved me hours every week. Worth every rupee.", name: "Meera S.", role: "Health Coach, Bangalore", init: "M" },
+  { quote: "Jitendra understands what Indian creators actually need. Practical and no-nonsense.", name: "Vikram P.", role: "Finance YouTuber, Delhi", init: "V" },
+];
+
+const track = document.getElementById('track');
+const allTestis = [...testiData, ...testiData]; // duplicate for seamless loop
+allTestis.forEach(t => {
+  const card = document.createElement('div');
+  card.className = 'testi-card';
+  card.innerHTML = `
+    <div class="stars">★★★★★</div>
+    <blockquote>"${t.quote}"</blockquote>
+    <div class="testi-author">
+      <div class="testi-avatar">${t.init}</div>
+      <div class="testi-meta">
+        <div class="name">${t.name}</div>
+        <div class="role">${t.role}</div>
+      </div>
+    </div>`;
+  track.appendChild(card);
+});
+</script>
+</body>
+</html>
